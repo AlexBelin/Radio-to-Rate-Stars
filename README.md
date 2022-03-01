@@ -6,10 +6,10 @@ The second one is the use case
 Exemple:  
 HTML:  
 &lt;div class="sc-formfield-input-wrapper" id="wrapper2"&gt;  
-      radio1  
-      radio2  
-      radio3  
-      etc.  
+&nbsp;&nbsp;&nbsp;&nbsp;radio1  
+&nbsp;&nbsp;&nbsp;&nbsp;radio2  
+&nbsp;&nbsp;&nbsp;&nbsp;radio3  
+&nbsp;&nbsp;&nbsp;&nbsp;etc.  
 &lt;/div&gt;
 
 JS:  
