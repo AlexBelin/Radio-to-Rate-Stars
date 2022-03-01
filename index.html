@@ -37,7 +37,7 @@
         </div>
     </div>
     <br>
-    <div class="sc-formfield-input-wrapper radios-to-ratestars" id="2">
+    <div class="sc-formfield-input-wrapper radios-to-ratestars" id="3">
         <div class="sc-formfield-input"><input type="radio" name="Aide_definition_besoins_note_4" data-field-type="Text" value="1" id="id1"><label for="id1"></label></div>
         <div class="sc-formfield-input"><input type="radio" name="Aide_definition_besoins_note_4" data-field-type="Text" value="2" id="id2"><label for="id2"></label></div>
         <div class="sc-formfield-input"><input type="radio" name="Aide_definition_besoins_note_4" data-field-type="Text" value="3" id="id3"><label for="id3"></label></div>
@@ -89,7 +89,7 @@
                 var backGround = '';
                 this.elements.forEach(elem => {
                     indexCurrentTrigger <= indexTrigger ? backGround = "url('" + this.starOn + "') top left /cover no-repeat" : backGround = "url('" + this.starOff + "') top left /cover no-repeat"
-                    elem.style.background = backGround
+                    elem.style.background = backGround;
                     indexCurrentTrigger++;
                 });
             }
