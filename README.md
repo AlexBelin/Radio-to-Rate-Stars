@@ -9,7 +9,7 @@ HTML:
   radio1  
   radio2  
   radio3  
-  etc.
+  etc.  
 &lt;/div&gt;
 
 JS:  
