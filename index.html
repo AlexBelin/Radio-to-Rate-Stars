@@ -36,6 +36,14 @@
             <div class="sc-formfield-input"><label><input type="radio" name="Aide_definition_besoins_note_3" data-field-type="Text" value="5">5</label></div>
         </div>
     </div>
+    <br>
+    <div class="sc-formfield-input-wrapper radios-to-ratestars" id="2">
+        <div class="sc-formfield-input"><input type="radio" name="Aide_definition_besoins_note_4" data-field-type="Text" value="1" id="id1"><label for="id1"></label></div>
+        <div class="sc-formfield-input"><input type="radio" name="Aide_definition_besoins_note_4" data-field-type="Text" value="2" id="id2"><label for="id2"></label></div>
+        <div class="sc-formfield-input"><input type="radio" name="Aide_definition_besoins_note_4" data-field-type="Text" value="3" id="id3"><label for="id3"></label></div>
+        <div class="sc-formfield-input"><input type="radio" name="Aide_definition_besoins_note_4" data-field-type="Text" value="4" id="id4"><label for="id4"></label></div>
+        <div class="sc-formfield-input"><input type="radio" name="Aide_definition_besoins_note_4" data-field-type="Text" value="5" id="id5"><label for="id5"></label></div>
+    </div>
 
     <script>
         class radioToStarsInstance {
@@ -50,14 +58,14 @@
 
             init() {
                 if(this.wrapper) {
+                    this.hideAllInputsRadio();
                     this.wrapper.style.display = "flex";
                     this.wrapper.style.gap = this.configObj.gap;
                     this.elements = Array.from(this.wrapper.querySelectorAll('label'));
                     var index = 0;
                     this.elements.forEach(elem => {
                         var inputElement = elem.querySelectorAll('input')[0];
-                        inputElement.style.display = 'none';
-                        elem.innerHTML = inputElement.outerHTML;
+                        inputElement ? elem.innerHTML = inputElement.outerHTML : null;
                         elem.style.width = this.configObj.dim;
                         elem.style.height = this.configObj.dim;
                         elem.style.background = "url('" + this.starOff + "') top left /cover no-repeat";
@@ -67,6 +75,13 @@
                         index++;
                     });
                 }
+            }
+
+            hideAllInputsRadio() {
+                var inputsRadio = Array.from(this.wrapper.querySelectorAll('input[type="radio"]'));
+                inputsRadio.forEach(input => {
+                    input.style.display = 'none';
+                });
             }
 
             checkUncheck(indexTrigger) {
