@@ -5,14 +5,14 @@ The second one is the use case
 
 Exemple:  
 **HTML**:  
-&lt;div class="sc-formfield-input-wrapper" id="wrapper1"&gt;  
+&lt;div class="sc-formfield-input-wrapper radios-to-ratestars"&gt;  
 &nbsp;&nbsp;&nbsp;&nbsp;radio1  
 &nbsp;&nbsp;&nbsp;&nbsp;radio2  
 &nbsp;&nbsp;&nbsp;&nbsp;radio3  
 &nbsp;&nbsp;&nbsp;&nbsp;etc.  
 &lt;/div&gt;  
 
-&lt;div class="sc-formfield-input-wrapper" id="wrapper2"&gt;  
+&lt;div class="sc-formfield-input-wrapper radios-to-ratestars"&gt;  
 &nbsp;&nbsp;&nbsp;&nbsp;radio1  
 &nbsp;&nbsp;&nbsp;&nbsp;radio2  
 &nbsp;&nbsp;&nbsp;&nbsp;radio3  
@@ -22,16 +22,13 @@ Exemple:
 &lt;/div&gt;
 
 **JS**:  
-var radiosStars1 = new radioToStars({'target': 'wrapper1', 'gap': '10px', 'dim': '32px', 'starOn': 'star_on.png', 'starOff': 'star_off.png'});  
-radiosStars1.init();
-
-var radiosStars2 = new radioToStars({'target': 'wrapper2', 'gap': '10px', 'dim': '32px', 'starOn': 'star_on.png', 'starOff': 'star_off.png'});  
-radiosStars2.init();
+var radiosStars = new radioToStars({'target': '.radios-to-ratestars', 'gap': '4px', 'dim': '32px', 'starOn': 'star_on.png', 'starOff': 'star_off.png'});  
+radiosStars.init();
 
 **configuration**  
-target => id of the radios wrapper  
+target => class the radios wrappers to target  
 gap => make the stars spaced  
-dim => size of the stars  
+dim => stars size  
 starOn => image of the selected stars  
 starOff => image of the unselected stars
 
