@@ -33,5 +33,6 @@ dim => size of the stars
 starOn => image of the selected stars  
 starOff => image of the unselected stars
 
-**Pay attention**
-Each radios group must be targeted by a separate instance
+**Pay attention**  
+Each radio group wrapper must have an id
+Each id must be targeted by a separate instance
