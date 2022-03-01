@@ -5,7 +5,7 @@ The second one is the use case
 
 Exemple:  
 HTML:  
-<div class="sc-formfield-input-wrapper" id="wrapper2">  
+&lt;div class="sc-formfield-input-wrapper" id="wrapper2">  
   radio1  
   radio2  
   radio3  
