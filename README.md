@@ -35,4 +35,4 @@ starOff => image of the unselected stars
 
 **Pay attention**  
 Each radio group wrapper must have an id  
-Each id must be targeted by a separate instance
+Each id must be targeted by a separate js instance
