@@ -26,7 +26,7 @@ var radiosStars = new radioToStars({'target': '.radios-to-ratestars', 'gap': '4p
 radiosStars.init();
 
 **configuration**  
-target => class the radios wrappers to target  
+target => class of the radios wrappers to target  
 gap => make the stars spaced  
 dim => stars size  
 starOn => image of the selected stars  
