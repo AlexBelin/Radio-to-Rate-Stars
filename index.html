@@ -52,12 +52,10 @@
 
             checkUncheck(indexTrigger) {
                 var indexCurrentTrigger = 0;
+                var backGround = '';
                 this.elements.forEach(elem => {
-                    if(indexCurrentTrigger <= indexTrigger) {
-                        elem.style.background = "url('" + this.starOn + "') top left /cover no-repeat";
-                    } else {
-                        elem.style.background = "url('" + this.starOff + "') top left /cover no-repeat";
-                    }
+                    indexCurrentTrigger <= indexTrigger ? backGround = "url('" + this.starOn + "') top left /cover no-repeat" : backGround = "url('" + this.starOff + "') top left /cover no-repeat"
+                    elem.style.background = backGround
                     indexCurrentTrigger++;
                 });
             }
@@ -72,11 +70,7 @@
                     this.currentNote = indexTrigger;
                 });
                 this.wrapper.addEventListener('mouseleave', () => {
-                    if(!this.wrapper.querySelector('input:checked')) {
-                        this.checkUncheck(-1);
-                    } else {
-                        this.checkUncheck(this.currentNote);
-                    }
+                    !this.wrapper.querySelector('input:checked') ? this.checkUncheck(-1) : this.checkUncheck(this.currentNote);
                 });
             }
         }
