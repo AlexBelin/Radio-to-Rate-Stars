@@ -13,7 +13,8 @@ Exemple:
 &lt;/div&gt;
 
 **JS**:  
-var radiosStars = new radioToStars({'target': 'wrapper2', 'gap': '10px', 'dim': '32px', 'starOn': 'star_on.png', 'starOff': 'star_off.png'});
+var radiosStars = new radioToStars({'target': 'wrapper2', 'gap': '10px', 'dim': '32px', 'starOn': 'star_on.png', 'starOff': 'star_off.png'});  
+radiosStars.init();
 
 target => id of the radios wrapper  
 gap => make the stars spaced  
