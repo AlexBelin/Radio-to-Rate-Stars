@@ -34,5 +34,5 @@ starOn => image of the selected stars
 starOff => image of the unselected stars
 
 **Pay attention**  
-Each radio group wrapper must have an id
+Each radio group wrapper must have an id  
 Each id must be targeted by a separate instance
