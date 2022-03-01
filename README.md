@@ -5,12 +5,12 @@ The second one is the use case
 
 Exemple:  
 HTML:  
-&lt;div class="sc-formfield-input-wrapper" id="wrapper2">  
+&lt;div class="sc-formfield-input-wrapper" id="wrapper2"&gt;  
   radio1  
   radio2  
   radio3  
   etc.
-</div> 
+&lt;/div&gt;
 
 JS:  
 var radiosStars = new radioToStars({'target': 'wrapper2', 'gap': '10px', 'dim': '32px', 'starOn': 'star_on.png', 'starOff': 'star_off.png'});
