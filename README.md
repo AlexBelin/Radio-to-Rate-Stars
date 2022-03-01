@@ -28,7 +28,7 @@ radiosStars1.init();
 var radiosStars2 = new radioToStars({'target': 'wrapper2', 'gap': '10px', 'dim': '32px', 'starOn': 'star_on.png', 'starOff': 'star_off.png'});  
 radiosStars2.init();
 
-**configuration** 
+**configuration**  
 target => id of the radios wrapper  
 gap => make the stars spaced  
 dim => size of the stars  
