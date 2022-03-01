@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="smartcapture-controls">
+        <div class="sc-formfield-label">2. Dans le cadre de votre recherche, comment évaluez-vous : (sur une échelle de 1 à 5, 1 étant la&nbsp;moins bonne&nbsp;note et&nbsp;5 la meilleure) : </div>
+            <div class="sc-formfield-input-wrapper" id="wrapper2">
+                <div class="sc-formfield-input"><label><input type="radio" name="Aide_definition_besoins_note" data-field-type="Text" value="1">1</label></div>
+                <div class="sc-formfield-input"><label><input type="radio" name="Aide_definition_besoins_note" data-field-type="Text" value="2">2</label></div>
+                <div class="sc-formfield-input"><label><input type="radio" name="Aide_definition_besoins_note" data-field-type="Text" value="3">3</label></div>
+                <div class="sc-formfield-input"><label><input type="radio" name="Aide_definition_besoins_note" data-field-type="Text" value="4">4</label></div>
+                <div class="sc-formfield-input"><label><input type="radio" name="Aide_definition_besoins_note" data-field-type="Text" value="5">5</label></div>
+            </div>
+    </div>
+
+    <script>
+        class radioToStars {
+            constructor(configObj) {
+                this.configObj = configObj;
+                this.wrapper = document.getElementById(this.configObj.target);
+                this.starOn = this.configObj.starOn;
+                this.starOff = this.configObj.starOff;
+                this.elements = [];
+                this.currentNote = 0;
+            }
+
+            init() {
+                if(this.wrapper) {
+                    this.wrapper.style.display = "flex";
+                    this.wrapper.style.gap = this.configObj.gap;
+                    this.elements = Array.from(this.wrapper.querySelectorAll('label'));
+                    var index = 0;
+                    this.elements.forEach(elem => {
+                        var inputElement = elem.querySelectorAll('input')[0];
+                        inputElement.style.display = 'none';
+                        elem.innerHTML = inputElement.outerHTML;
+                        elem.style.width = this.configObj.dim;
+                        elem.style.height = this.configObj.dim;
+                        elem.style.background = "url('" + this.starOff + "') top left /cover no-repeat";
+                        elem.style.display = "block";
+                        elem.style.cursor = "pointer";
+                        this.addListener(elem, index);
+                        index++;
+                    });
+                }
+            }
+
+            checkUncheck(indexTrigger) {
+                var indexCurrentTrigger = 0;
+                this.elements.forEach(elem => {
+                    if(indexCurrentTrigger <= indexTrigger) {
+                        elem.style.background = "url('" + this.starOn + "') top left /cover no-repeat";
+                    } else {
+                        elem.style.background = "url('" + this.starOff + "') top left /cover no-repeat";
+                    }
+                    indexCurrentTrigger++;
+                });
+            }
+            
+            addListener(trigger, indexTrigger) {
+                'mouseover, mouseup'.split(', ').forEach(event => {
+                    trigger.addEventListener(event, () => {
+                        this.checkUncheck(indexTrigger);
+                    });
+                });
+                trigger.addEventListener('mouseup', () => {
+                    this.currentNote = indexTrigger;
+                });
+                this.wrapper.addEventListener('mouseleave', () => {
+                    if(!this.wrapper.querySelector('input:checked')) {
+                        this.checkUncheck(-1);
+                    } else {
+                        this.checkUncheck(this.currentNote);
+                    }
+                });
+            }
+        }
+    </script>
+
+    <script>
+        var radiosStars = new radioToStars({'target': 'wrapper2', 'gap': '10px', 'dim': '32px', 'starOn': 'star_on.png', 'starOff': 'star_off.png'});
+        radiosStars.init();
+    </script>
+</body>
+</html>
