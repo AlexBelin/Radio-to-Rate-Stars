@@ -36,14 +36,6 @@
             <div class="sc-formfield-input"><label><input type="radio" name="Aide_definition_besoins_note_3" data-field-type="Text" value="5">5</label></div>
         </div>
     </div>
-    <br>
-    <div class="sc-formfield-input-wrapper radios-to-ratestars" id="3">
-        <div class="sc-formfield-input"><input type="radio" name="Aide_definition_besoins_note_4" data-field-type="Text" value="1" id="id1"><label for="id1"></label></div>
-        <div class="sc-formfield-input"><input type="radio" name="Aide_definition_besoins_note_4" data-field-type="Text" value="2" id="id2"><label for="id2"></label></div>
-        <div class="sc-formfield-input"><input type="radio" name="Aide_definition_besoins_note_4" data-field-type="Text" value="3" id="id3"><label for="id3"></label></div>
-        <div class="sc-formfield-input"><input type="radio" name="Aide_definition_besoins_note_4" data-field-type="Text" value="4" id="id4"><label for="id4"></label></div>
-        <div class="sc-formfield-input"><input type="radio" name="Aide_definition_besoins_note_4" data-field-type="Text" value="5" id="id5"><label for="id5"></label></div>
-    </div>
 
     <script>
         class radioToStarsInstance {
@@ -52,19 +44,20 @@
                 this.wrapper = wrapper;
                 this.starOn = this.configObj.starOn;
                 this.starOff = this.configObj.starOff;
-                this.elements = [];
+                this.elements = Array.from(this.wrapper.querySelectorAll('label'));
+                this.inputsRadio = Array.from(this.wrapper.querySelectorAll('input[type="radio"]'));
                 this.currentNote = 0;
             }
 
             init() {
                 if(this.wrapper) {
                     this.hideAllInputsRadio();
+                    this.accessibilityNav();
                     this.wrapper.style.display = "flex";
                     this.wrapper.style.gap = this.configObj.gap;
-                    this.elements = Array.from(this.wrapper.querySelectorAll('label'));
                     var index = 0;
                     this.elements.forEach(elem => {
-                        var inputElement = elem.querySelectorAll('input')[0];
+                        var inputElement = elem.querySelector('input');
                         inputElement ? elem.innerHTML = inputElement.outerHTML : null;
                         elem.style.width = this.configObj.dim;
                         elem.style.height = this.configObj.dim;
@@ -78,9 +71,17 @@
             }
 
             hideAllInputsRadio() {
-                var inputsRadio = Array.from(this.wrapper.querySelectorAll('input[type="radio"]'));
-                inputsRadio.forEach(input => {
-                    input.style.display = 'none';
+                this.inputsRadio.forEach(input => {
+                    input.style.position = 'fixed';
+                    input.style.opacity = '0';
+                    input.style.top = '-100px';
+                });
+            }
+
+            accessibilityNav() {
+                document.body.addEventListener('keyup', () => {
+                    document.activeElement.click();
+                    this.elements.indexOf(document.activeElement.parentNode) !== -1 ? this.checkUncheck(this.elements.indexOf(document.activeElement.parentNode)) : null;
                 });
             }
 
@@ -88,7 +89,7 @@
                 var indexCurrentTrigger = 0;
                 var backGround = '';
                 this.elements.forEach(elem => {
-                    indexCurrentTrigger <= indexTrigger ? backGround = "url('" + this.starOn + "') top left /cover no-repeat" : backGround = "url('" + this.starOff + "') top left /cover no-repeat"
+                    indexCurrentTrigger <= indexTrigger ? backGround = "url('" + this.starOn + "') top left /cover no-repeat" : backGround = "url('" + this.starOff + "') top left /cover no-repeat";
                     elem.style.background = backGround;
                     indexCurrentTrigger++;
                 });
