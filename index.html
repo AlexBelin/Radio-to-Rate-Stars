@@ -46,7 +46,7 @@
                 this.starOff = this.configObj.starOff;
                 this.elements = Array.from(this.wrapper.querySelectorAll('label'));
                 this.inputsRadio = Array.from(this.wrapper.querySelectorAll('input[type="radio"]'));
-                this.currentNote = 0;
+                this.currentNote = -1;
             }
 
             init() {
@@ -64,7 +64,7 @@
                         elem.style.background = "url('" + this.starOff + "') top left /cover no-repeat";
                         elem.style.display = "block";
                         elem.style.cursor = "pointer";
-                        this.addListener(elem, index);
+                        this.addListener(elem);
                         index++;
                     });
                 }
@@ -80,32 +80,33 @@
 
             accessibilityNav() {
                 document.body.addEventListener('keyup', () => {
-                    document.activeElement.click();
-                    this.elements.indexOf(document.activeElement.parentNode) !== -1 ? this.checkUncheck(this.elements.indexOf(document.activeElement.parentNode)) : null;
+                    var activeElement = document.activeElement;
+                    activeElement.checked = true;
+                    this.currentNote = this.elements.indexOf(activeElement.parentNode);
+                    this.currentNote !== -1 ? this.checkUncheck(this.currentNote) : null;
                 });
             }
 
-            checkUncheck(indexTrigger) {
+            checkUncheck(currentIndex) {
                 var indexCurrentTrigger = 0;
                 var backGround = '';
                 this.elements.forEach(elem => {
-                    indexCurrentTrigger <= indexTrigger ? backGround = "url('" + this.starOn + "') top left /cover no-repeat" : backGround = "url('" + this.starOff + "') top left /cover no-repeat";
+                    indexCurrentTrigger <= currentIndex ? backGround = "url('" + this.starOn + "') top left /cover no-repeat" : backGround = "url('" + this.starOff + "') top left /cover no-repeat";
                     elem.style.background = backGround;
                     indexCurrentTrigger++;
                 });
             }
             
-            addListener(trigger, indexTrigger) {
-                'mouseover, mouseup'.split(', ').forEach(event => {
-                    trigger.addEventListener(event, () => {
-                        this.checkUncheck(indexTrigger);
-                    });
+            addListener(trigger) {
+                var indexTrigger = this.elements.indexOf(trigger);
+                trigger.addEventListener('mouseover', () => {
+                    this.checkUncheck(indexTrigger);
                 });
                 trigger.addEventListener('mouseup', () => {
                     this.currentNote = indexTrigger;
                 });
                 this.wrapper.addEventListener('mouseleave', () => {
-                    !this.wrapper.querySelector('input:checked') ? this.checkUncheck(-1) : this.checkUncheck(this.currentNote);
+                    this.currentNote !== -1 ? this.checkUncheck(this.currentNote) : this.checkUncheck(-1);
                 });
             }
         }
