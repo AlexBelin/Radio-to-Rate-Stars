@@ -33,5 +33,5 @@ starOn => image of the selected stars
 starOff => image of the unselected stars
 
 **Pay attention**  
-Each radio group wrapper must have an id  
-Each id must be targeted by a separate js instance
+inputs[radio] must be inside labels  
+labels must be wrapped in div
