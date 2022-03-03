@@ -45,46 +45,57 @@
                 this.starOn = this.configObj.starOn;
                 this.starOff = this.configObj.starOff;
                 this.elements = Array.from(this.wrapper.querySelectorAll('label'));
-                this.inputsRadio = Array.from(this.wrapper.querySelectorAll('input[type="radio"]'));
                 this.currentNote = -1;
             }
 
             init() {
                 if(this.wrapper) {
-                    this.hideAllInputsRadio();
                     this.accessibilityNav();
                     this.wrapper.style.display = "flex";
                     this.wrapper.style.gap = this.configObj.gap;
+                    this.wrapper.addEventListener('mouseleave', this.mouseLeave.bind(this));
                     var index = 0;
                     this.elements.forEach(elem => {
-                        var inputElement = elem.querySelector('input');
+                        var inputElement = elem.querySelectorAll('input[type="radio"]')[0];
+                        this.hideInputRadio(inputElement);
                         inputElement ? elem.innerHTML = inputElement.outerHTML : null;
-                        elem.style.width = this.configObj.dim;
-                        elem.style.height = this.configObj.dim;
-                        elem.style.background = "url('" + this.starOff + "') top left /cover no-repeat";
-                        elem.style.display = "block";
-                        elem.style.cursor = "pointer";
+                        this.stylizeLabel(elem);
                         this.addListener(elem);
                         index++;
                     });
                 }
             }
 
-            hideAllInputsRadio() {
-                this.inputsRadio.forEach(input => {
-                    input.style.position = 'fixed';
-                    input.style.opacity = '0';
-                    input.style.top = '-100px';
-                });
+            mouseLeave() {
+                this.currentNote !== -1 ? this.checkUncheck(this.currentNote) : this.checkUncheck(-1);
+            }
+
+            stylizeLabel(currentLabel) {
+                currentLabel.style.width = this.configObj.dim;
+                currentLabel.style.height = this.configObj.dim;
+                currentLabel.style.background = "url('" + this.starOff + "') top left /cover no-repeat";
+                currentLabel.style.display = "block";
+                currentLabel.style.cursor = "pointer";
+            }
+
+            hideInputRadio(currentInput) {
+                currentInput.style.position = 'fixed';
+                currentInput.style.opacity = '0';
+                currentInput.style.top = '-100px';
             }
 
             accessibilityNav() {
-                document.body.addEventListener('keyup', () => {
-                    var activeElement = document.activeElement;
-                    activeElement.checked = true;
-                    this.currentNote = this.elements.indexOf(activeElement.parentNode);
+                document.body.addEventListener('keyup', this.keyUp.bind(this));
+            }
+
+            keyUp() {
+                var activeElement = document.activeElement;
+                activeElement.checked = true;
+                var index = this.elements.indexOf(activeElement.parentNode);
+                if(index !== -1) {
+                    this.currentNote = index;
                     this.currentNote !== -1 ? this.checkUncheck(this.currentNote) : null;
-                });
+                }
             }
 
             checkUncheck(currentIndex) {
@@ -104,9 +115,6 @@
                 });
                 trigger.addEventListener('mouseup', () => {
                     this.currentNote = indexTrigger;
-                });
-                this.wrapper.addEventListener('mouseleave', () => {
-                    this.currentNote !== -1 ? this.checkUncheck(this.currentNote) : this.checkUncheck(-1);
                 });
             }
         }
