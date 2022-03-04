@@ -45,6 +45,16 @@
         <label><input type="radio" name="Aide_definition_besoins_note_4" data-field-type="Text" value="5">5</label>
     </div>
 
+    <!--not included in rate stars-->
+    <div>
+        <label><input type="radio" name="Aide_definition_besoins_note_5" data-field-type="Text" value="1">1</label>
+        <label><input type="radio" name="Aide_definition_besoins_note_5" data-field-type="Text" value="2">2</label>
+        <label><input type="radio" name="Aide_definition_besoins_note_5" data-field-type="Text" value="3">3</label>
+        <label><input type="radio" name="Aide_definition_besoins_note_5" data-field-type="Text" value="4">4</label>
+        <label><input type="radio" name="Aide_definition_besoins_note_5" data-field-type="Text" value="5">5</label>
+    </div>
+    <!--not included in rate stars-->
+
     <script>
         class radioToStarsInstance {
             constructor(wrapper, radioStarSystem) {
@@ -98,9 +108,9 @@
 
             keyUp() {
                 var activeElement = document.activeElement;
-                activeElement.checked = true;
                 var index = this.elements.indexOf(activeElement.parentNode);
                 if(index !== -1) {
+                    activeElement.checked = true;
                     this.currentNote = index;
                     this.currentNote !== -1 ? this.checkUncheck(this.currentNote) : null;
                 }
